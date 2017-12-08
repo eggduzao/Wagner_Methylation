@@ -4,12 +4,13 @@ import os
 import sys
 
 # Input
-expFileName = "/home/egg/Projects/Wagner_Methylation/Data/RNA_genes/RNA_genes_full_data.txt"
-aliasFileName = "/home/egg/Projects/Wagner_Methylation/Data/genome/alias_human.txt"
-genesFileName = "/home/egg/Projects/Wagner_Methylation/Data/genome/genes_RefSeq_hg19.bed"
-dnasePeakFileName = "/home/egg/Projects/Gusmao_DeNovo/Wagner_Data/MSC_OpenChromatin/peaks/DNase_MSC_filtered_peaks.bed"
-outputFileNameUpReg = "/home/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/genes_up.bed"
-outputFileNameDownReg = "/home/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/genes_down.bed"
+expFileName = "/Users/egg/Projects/Wagner_Methylation/Data/RNA_genes/RNA_genes_full_data.txt"
+aliasFileName = "/Users/egg/rgtdata/hg19/alias_human.txt"
+genesFileName = "/Users/egg/rgtdata/hg19/genes_RefSeq_hg19.bed"
+dnasePeakFileName = "/Users/egg/Projects/Gusmao_DeNovo/Data/Wagner_Data/MSC_OpenChromatin/peaks/DNase_MSC_filtered_peaks.bed"
+outLoc = "/Users/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/"
+outputFileNameUpReg = outLoc+"genes_up.bed"
+outputFileNameDownReg = outLoc+"genes_down.bed"
 
 # Parameters
 geneBodyAdd = 20
@@ -51,12 +52,12 @@ for line in genesFile:
     try: genesDict[aliasDict[geneN]] = [[chrom,p1,p2]]
     except Exception: genesDict[geneN] = [[chrom,p1,p2]]
 
-# Iterating on methylation table
+# Iterating on expression table
 toRemove = []
 expFile = open(expFileName,"r")
 for e in range(0,1): expFile.readline()
-outputFileNameUpRegTemp = "/home/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/genes_up_temp.bed"
-outputFileNameDownRegTemp = "/home/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/genes_down_temp.bed"
+outputFileNameUpRegTemp = outLoc+"genes_up_temp.bed"
+outputFileNameDownRegTemp = outLoc+"genes_down_temp.bed"
 toRemove.append(outputFileNameUpRegTemp); toRemove.append(outputFileNameDownRegTemp)
 outputFileUpRegTemp = open(outputFileNameUpRegTemp,"w")
 outputFileDownRegTemp = open(outputFileNameDownRegTemp,"w")
@@ -87,8 +88,8 @@ outputFileUpRegTemp.close()
 outputFileDownRegTemp.close()
 
 # Sorting output files
-outputFileNameUpRegTempSort = "/home/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/genes_up_sort.bed"
-outputFileNameDownRegTempSort = "/home/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/genes_down_sort.bed"
+outputFileNameUpRegTempSort = outLoc+"genes_up_sort.bed"
+outputFileNameDownRegTempSort = outLoc+"genes_down_sort.bed"
 toRemove.append(outputFileNameUpRegTempSort); toRemove.append(outputFileNameDownRegTempSort)
 os.system("sort -k1,1 -k2,2n "+outputFileNameUpRegTemp+" | uniq > "+outputFileNameUpRegTempSort)
 os.system("sort -k1,1 -k2,2n "+outputFileNameDownRegTemp+" | uniq > "+outputFileNameDownRegTempSort)

@@ -4,14 +4,15 @@ import os
 import sys
 
 # Input
-methFileName = "/home/egg/Projects/Wagner_Methylation/Data/DNAm/DNAm_full_data.txt"
-aliasFileName = "/home/egg/Projects/Wagner_Methylation/Data/genome/alias_human.txt"
-genesFileName = "/home/egg/Projects/Wagner_Methylation/Data/genome/genes_RefSeq_hg19.bed"
-dnasePeakFileName = "/home/egg/Projects/Gusmao_DeNovo/Wagner_Data/MSC_OpenChromatin/peaks/DNase_MSC_filtered_peaks.bed"
-outputFileNameHyperMeth = "/home/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/hyper_meth.bed"
-outputFileNameHypoMeth = "/home/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/hypo_meth.bed"
-outputFileNameHyperMethGenes = "/home/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/hyper_meth_genes.bed"
-outputFileNameHypoMethGenes = "/home/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/hypo_meth_genes.bed"
+methFileName = "/Users/egg/Projects/Wagner_Methylation/Data/DNAm/DNAm_full_data.txt"
+aliasFileName = "/Users/egg/rgtdata/hg19/alias_human.txt"
+genesFileName = "/Users/egg/rgtdata/hg19/genes_RefSeq_hg19.bed"
+dnasePeakFileName = "/Users/egg/Projects/Gusmao_DeNovo/Data/Wagner_Data/MSC_OpenChromatin/peaks/DNase_MSC_filtered_peaks.bed"
+outLoc = "/Users/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/"
+outputFileNameHyperMeth = outLoc+"hyper_meth.bed"
+outputFileNameHypoMeth = outLoc+"hypo_meth.bed"
+outputFileNameHyperMethGenes = outLoc+"hyper_meth_genes.bed"
+outputFileNameHypoMethGenes = outLoc+"hypo_meth_genes.bed"
 
 # Parameters
 geneBodyAdd = 20
@@ -57,10 +58,10 @@ for line in genesFile:
 toRemove = []
 methFile = open(methFileName,"r")
 for e in range(0,2): methFile.readline()
-outputFileNameHyperMethTemp = "/home/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/hyper_meth_temp.bed"
-outputFileNameHypoMethTemp = "/home/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/hypo_meth_temp.bed"
-outputFileNameHyperMethGenesTemp = "/home/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/hyper_meth_genes_temp.bed"
-outputFileNameHypoMethGenesTemp = "/home/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/hypo_meth_genes_temp.bed"
+outputFileNameHyperMethTemp = outLoc+"hyper_meth_temp.bed"
+outputFileNameHypoMethTemp = outLoc+"hypo_meth_temp.bed"
+outputFileNameHyperMethGenesTemp = outLoc+"hyper_meth_genes_temp.bed"
+outputFileNameHypoMethGenesTemp = outLoc+"hypo_meth_genes_temp.bed"
 toRemove.append(outputFileNameHyperMethTemp); toRemove.append(outputFileNameHypoMethTemp)
 toRemove.append(outputFileNameHyperMethGenesTemp); toRemove.append(outputFileNameHypoMethGenesTemp)
 outputFileHyperMeth = open(outputFileNameHyperMethTemp,"w")
@@ -104,10 +105,10 @@ outputFileHyperMethGenes.close()
 outputFileHypoMethGenes.close()
 
 # Sorting output files
-outputFileNameHyperMethSort = "/home/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/hyper_meth_sort.bed"
-outputFileNameHypoMethSort = "/home/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/hypo_meth_sort.bed"
-outputFileNameHyperMethGenesSort = "/home/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/hyper_meth_genes_sort.bed"
-outputFileNameHypoMethGenesSort = "/home/egg/Projects/Wagner_Methylation/Results/Parsed_Regions/hypo_meth_genes_sort.bed"
+outputFileNameHyperMethSort = outLoc+"hyper_meth_sort.bed"
+outputFileNameHypoMethSort = outLoc+"hypo_meth_sort.bed"
+outputFileNameHyperMethGenesSort = outLoc+"hyper_meth_genes_sort.bed"
+outputFileNameHypoMethGenesSort = outLoc+"hypo_meth_genes_sort.bed"
 toRemove.append(outputFileNameHyperMethSort); toRemove.append(outputFileNameHypoMethSort)
 toRemove.append(outputFileNameHyperMethGenesSort); toRemove.append(outputFileNameHypoMethGenesSort)
 os.system("sort -k1,1 -k2,2n "+outputFileNameHyperMethTemp+" | uniq > "+outputFileNameHyperMethSort)

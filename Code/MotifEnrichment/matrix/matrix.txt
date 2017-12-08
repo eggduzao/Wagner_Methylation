@@ -1,2 +1,0 @@
-name	type	file
-cpg_results	regions	/home/egg/Projects/Wagner/input/result_extended.bed
